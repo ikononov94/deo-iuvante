@@ -1,5 +1,5 @@
 #!/bin/bash
 #docker build -t deo-iuvante .
 #docker login -u=_ -p=$DOCKER_PASSWORD registry.heroku.com
-docker tag deo-iuvante registry.heroku.com/deo-iuvante/web
-docker push registry.heroku.com/deo-iuvante/web
+docker tag deo-iuvante registry.heroku.com/kononov-deo-iuvante/web
+docker push registry.heroku.com/kononov-deo-iuvante/web
