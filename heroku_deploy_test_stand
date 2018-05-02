@@ -1,8 +1,8 @@
 #!/bin/bash
 docker build -t deo-iuvante .
-docker login -u=_ -p=$DOCKER_PASSWORD registry.heroku.com
-docker tag deo-iuvante registry.heroku.com/kononov-deo-iuvante-test/web
-docker push registry.heroku.com/kononov-deo-iuvante-test/web
+docker login -u=_ -p=$HEROKU_KEY registry.heroku.com
+docker tag deo-iuvante registry.heroku.com/ikononov-deo-iuvante-test/web
+docker push registry.heroku.com/ikononov-deo-iuvante-test/web
 
 docker pull selenium/standalone-chrome
 docker run -d -p 4444:4444 --shm-size=2g selenium/standalone-chrome
