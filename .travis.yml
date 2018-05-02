@@ -6,14 +6,19 @@ node_js:
   - node
 node_js:
   - "lts/*"
-script:
-  - bash heroku_deploy_test_stand
-  - npm run lint
-  - npm run test
-  - npm run build
-  - npm run test:integration
-deploy:
-  provider: script
-  script: bash heroku_deploy
-  on:
-    branch: master
+
+jobs:
+  include:
+    - stage: Lint
+      script: npm run lint
+    - stage: Unit testing
+      script: npm run test
+    - stage: Integration testing
+      script: bash heroku_deploy_test_stand && npm run test:integration
+    - stage: Deploy
+      script: npm run build
+      deploy:
+        provider: script
+        script: bash heroku_deploy
+        on:
+          branch: master
