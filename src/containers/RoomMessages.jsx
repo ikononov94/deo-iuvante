@@ -13,21 +13,6 @@ class RoomMessages extends Component {
     this.props.fetchUsers();
   }
 
-  componentDidUpdate() {
-    this.clearTimeout();
-
-    this.timeout = setTimeout(() => this.props.readMessages(this.props.roomId), 500);
-  }
-
-  componentWillUnmount() {
-    this.clearTimeout();
-  }
-
-  clearTimeout() {
-    // eslint-disable-next-line no-unused-expressions
-    this.timeout && clearTimeout(this.timeout);
-  }
-
   render() {
     return (
       <Chat
@@ -37,6 +22,7 @@ class RoomMessages extends Component {
         roomId={this.props.roomId}
         isFetchingMessages={this.props.isFetchingMessages}
         users={this.props.users}
+        readMessages={this.props.readMessages}
       />
     );
   }
