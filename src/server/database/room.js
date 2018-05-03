@@ -159,8 +159,12 @@ async function leaveRoom(db, currentUser, { roomId, userId }) {
     throw new Error('You must specify userId to join');
   }
 
-  const collection = db.collection(COLL),
-    [room, user] = await Promise.all([getRoom(db, currentUser, roomId), getUser(db, userId)]);
+  const collection = db.collection(COLL);
+
+  const [room, user] = await Promise.all([
+    getRoom(db, roomId, currentUser),
+    getUser(db, userId),
+  ]);
 
   if (!room) {
     throw new Error(`Cannot find room with id=${roomId}`);
