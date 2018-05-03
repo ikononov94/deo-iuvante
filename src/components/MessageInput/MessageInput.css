@@ -11,7 +11,9 @@
   font-size: 14px;
 
   border-radius: 5px;
-  border: 1px solid lightgray;
+  background-color: #233342;
+  border: 1px solid #233342;
+  color: #fff;
 }
 
 .message-input input::placeholder {

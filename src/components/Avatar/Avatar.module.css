@@ -4,7 +4,7 @@
 }
 
 .avatarName {
-  background-color: #c3c3c3;
+  background-color: #5dade2;
   color: #fff;
   border-radius: 50%;
   margin: 0 auto;
@@ -15,16 +15,16 @@
 
 .avatarNameS {
   composes: avatarName;
-  width: 3rem;
-  height: 3rem;
-  font-size: 1.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.1rem;
 }
 
 .avatarNameM {
   composes: avatarName;
-  width: 5rem;
-  height: 5rem;
-  font-size: 2rem;
+  width: 4rem;
+  height: 4rem;
+  font-size: 1.8rem;
 }
 
 .avatarNameL {
@@ -41,14 +41,14 @@
 
 .imageS {
   composes: image;
-  width: 3rem;
-  height: 3rem;
+  width: 2.5rem;
+  height: 2.5rem;
 }
 
 .imageM {
   composes: image;
-  width: 5rem;
-  height: 5rem;
+  width: 4rem;
+  height: 4rem;
 }
 
 .imageL {

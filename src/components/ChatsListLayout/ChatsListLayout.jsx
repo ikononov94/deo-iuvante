@@ -34,7 +34,7 @@ class ChatsList extends Component {
   render() {
     return (
       <AppLayout
-        headerText="Your chats"
+        headerText="Чаты"
         headerRight={(
           <IconButton
             onClick={() => {}}

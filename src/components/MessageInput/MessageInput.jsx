@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import IconButton from '../IconButton/IconButton';
+
 import './MessageInput.css';
 
 class MessageInput extends Component {
@@ -33,6 +35,12 @@ class MessageInput extends Component {
           placeholder="Type your message"
           value={this.state.value}
           onChange={this.handleChange}
+        />
+        <IconButton
+          icon={{
+            color: '#a9d18b',
+            glyph: 'send',
+          }}
         />
       </form>
     );

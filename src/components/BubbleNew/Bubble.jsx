@@ -28,11 +28,13 @@ const renderMessageState = (viewState) => {
 const Bubble = props => (
   <div className={styles.Bubble} key={props.key}>
     <div className={props.isOwner ? styles.Owner : styles.NotOwner}>
-      <div className={styles.Checkmark}>{renderMessageState(props.viewState)}</div>
       <div className={styles.BubbleMessage}>
         {!props.isOwner && <p className={styles.UserName}>{props.username}</p>}
         <p>{props.message}</p>
-        <p className={styles.MessageDate}>{renderDate(props.time)}</p>
+        <p className={styles.MessageDate}>
+          <div className={styles.Checkmark}>{renderMessageState(props.viewState)}</div>
+          {renderDate(props.time)}
+        </p>
       </div>
       {!props.isOwner && <Avatar
         className={styles.Avatar}
