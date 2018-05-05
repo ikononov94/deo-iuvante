@@ -29,7 +29,7 @@ function Popup({
 
 Popup.propTypes = {
   fullSized: PropTypes.bool,
-  children: PropTypes.oneOf(PropTypes.node, PropTypes.arrayOf(PropTypes.node)).isRequired,
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]).isRequired,
   withCloseButton: PropTypes.bool,
   close: PropTypes.func,
 };

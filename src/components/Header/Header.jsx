@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
 import styles from './Header.module.css';
 
 function Header({
-  children, left, right, className,
+  children, left, right, className, showPopup,
 }) {
   return (
     <div className={`${styles.header} ${className}`}>
       <div className={styles.left_slot}>{left}</div>
-      <div className={styles.text}>
+      <div className={styles.text} onClick={showPopup}>
         {children}
       </div>
       <div className={styles.right_slot}>{right}</div>
@@ -22,6 +22,7 @@ Header.propTypes = {
   right: PropTypes.node,
   children: PropTypes.string,
   className: PropTypes.string,
+  showPopup: PropTypes.func,
 };
 
 Header.defaultProps = {
@@ -29,6 +30,7 @@ Header.defaultProps = {
   right: '',
   children: '',
   className: '',
+  showPopup: () => {},
 };
 
 export default Header;

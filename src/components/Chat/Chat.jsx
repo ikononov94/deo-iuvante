@@ -73,5 +73,8 @@ Chat.propTypes = {
   readMessages: PropTypes.func.isRequired,
   roomId: PropTypes.string.isRequired,
   isFetchingMessages: PropTypes.bool,
-  users: PropTypes.arrayOf(PropTypes.object).isRequired,
+  users: PropTypes.shape({
+    fetching: PropTypes.bool,
+    byId: PropTypes.objectOf(PropTypes.object),
+  }).isRequired,
 };

@@ -6,6 +6,11 @@ export const fetchRooms = () => (dispatch) => {
     .then(rooms => dispatch({ type: ActionTypes.FETCH_ROOMS_SUCCESS, payload: rooms }));
 };
 
+export const leaveRoom = roomId => (dispatch) => {
+  api.currentUserLeaveRoom(roomId)
+    .then(room => dispatch({ type: ActionTypes.CURRENT_USER_LEAVE_ROOM, payload: room }));
+};
+
 export const fetchRoom = roomId => (
   async (dispatch) => {
     dispatch({

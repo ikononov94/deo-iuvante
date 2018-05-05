@@ -15,15 +15,17 @@ class RoomMessages extends Component {
 
   render() {
     return (
-      <Chat
-        messages={this.props.messages}
-        currentUserId={this.props.currentUserId}
-        sendMessage={this.props.sendMessage}
-        roomId={this.props.roomId}
-        isFetchingMessages={this.props.isFetchingMessages}
-        users={this.props.users}
-        readMessages={this.props.readMessages}
-      />
+      <React.Fragment>
+        <Chat
+          messages={this.props.messages}
+          currentUserId={this.props.currentUserId}
+          sendMessage={this.props.sendMessage}
+          roomId={this.props.roomId}
+          isFetchingMessages={this.props.isFetchingMessages}
+          users={this.props.users}
+          readMessages={this.props.readMessages}
+        />
+      </React.Fragment>
     );
   }
 }
@@ -66,6 +68,8 @@ RoomMessages.propTypes = {
   readMessages: PropTypes.func.isRequired,
   isFetchingMessages: PropTypes.bool,
   messages: PropTypes.arrayOf(PropTypes.object),
-  users: PropTypes.arrayOf(PropTypes.object).isRequired,
+  users: PropTypes.shape({
+    fetching: PropTypes.bool,
+  }).isRequired,
   fetchUsers: PropTypes.func.isRequired,
 };
