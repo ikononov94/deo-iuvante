@@ -49,6 +49,5 @@ export const openRoom = roomId => (
     const room = rooms.byId[roomId];
 
     if (!room) { dispatch(fetchRoom(roomId)); }
-    dispatch(markAllUnreadMessages(roomId));
   }
 );
