@@ -20,11 +20,12 @@ class MessageInput extends Component {
   }
 
   handleSubmit(event) {
-    this.props.sendMessage(this.props.roomId, this.state.value);
-
-    this.setState({ value: '' });
-
     event.preventDefault();
+
+    if (!this.state.value.trim()) return;
+
+    this.props.sendMessage(this.props.roomId, this.state.value);
+    this.setState({ value: '' });
   }
 
   handleChange(event) {

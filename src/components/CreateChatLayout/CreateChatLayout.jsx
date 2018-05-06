@@ -70,7 +70,7 @@ class CreateChat extends Component {
   createRoom() {
     api.createRoom({
       users: this.state.selectedUsers,
-      name: this.state.roomName,
+      name: this.state.roomName.trim(),
     })
       .then(({ _id }) => {
         this.setState({
