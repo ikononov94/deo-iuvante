@@ -26,7 +26,7 @@ p {
   color: #fff;
   border-radius: .2rem;
   position: relative;
-  max-width: calc(100% - 9.5rem);
+  max-width: calc(100% - 5.5rem);
   display: flex;
   flex-direction: column;
 }
@@ -100,5 +100,6 @@ p {
 }
 
 .Message {
+  display: inline-block;
   word-break: break-word;
 }
