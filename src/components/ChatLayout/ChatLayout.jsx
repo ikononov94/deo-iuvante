@@ -59,7 +59,7 @@ class ChatLayout extends Component {
         headerRight={renderAvatar(chatNameAvatar)}
         showPopup={this.showPopup}
       >
-        { !roomIsFetching && <RoomMessages chatName={chatName} roomId={roomId} /> }
+        { !roomIsFetching && <RoomMessages room={room} chatName={chatName} roomId={roomId} /> }
         {
           this.state.popupVisible &&
             <Popup close={this.hidePopup} withCloseButton>

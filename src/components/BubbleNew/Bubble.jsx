@@ -29,16 +29,17 @@ const Bubble = props => (
   <div className={styles.Bubble} key={props.time}>
     <div className={props.isOwner ? styles.Owner : styles.NotOwner}>
       <div className={styles.BubbleMessage}>
-        {!props.isOwner && <p className={styles.UserName}>{props.username}</p>}
+        {!props.isOwner && props.usersCount > 2 && <p className={styles.UserName}>{props.username}</p>}
         <p>{props.message}</p>
         <div className={styles.MessageDate}>
           <div className={styles.Checkmark}>{renderMessageState(props.viewState)}</div>
           {renderDate(props.time)}
         </div>
       </div>
-      {!props.isOwner && <Avatar
+      {!props.isOwner && props.usersCount > 2 && <Avatar
         className={styles.Avatar}
         src={props.avatarUrl}
+        avatarName={props.username}
         size="s"
       />}
     </div>
@@ -52,6 +53,7 @@ Bubble.propTypes = {
   avatarUrl: PropTypes.string,
   message: PropTypes.string.isRequired,
   isOwner: PropTypes.bool,
+  usersCount: PropTypes.number.isRequired,
 };
 
 Bubble.defaultProps = {

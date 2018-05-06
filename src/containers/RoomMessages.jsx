@@ -24,6 +24,7 @@ class RoomMessages extends Component {
           isFetchingMessages={this.props.isFetchingMessages}
           users={this.props.users}
           readMessages={this.props.readMessages}
+          room={this.props.room}
         />
       </React.Fragment>
     );
@@ -72,4 +73,7 @@ RoomMessages.propTypes = {
     fetching: PropTypes.bool,
   }).isRequired,
   fetchUsers: PropTypes.func.isRequired,
+  room: PropTypes.shape({
+    _id: PropTypes.string,
+  }).isRequired,
 };

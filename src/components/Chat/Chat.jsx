@@ -30,6 +30,7 @@ export default class Chat extends Component {
         key={message._id}
         time={message.time}
         username={this.props.users.byId[message.userId] ? this.props.users.byId[message.userId].name : ''}
+        usersCount={this.props.room.users.length}
       />
     );
 
@@ -78,5 +79,8 @@ Chat.propTypes = {
   users: PropTypes.shape({
     fetching: PropTypes.bool,
     byId: PropTypes.objectOf(PropTypes.object),
+  }).isRequired,
+  room: PropTypes.shape({
+    users: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
 };
