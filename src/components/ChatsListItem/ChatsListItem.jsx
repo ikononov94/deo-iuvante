@@ -23,6 +23,14 @@ function getChatName(room, currentUser) {
   return room.name;
 }
 
+function getLastUsername(lastMessage, room, users, currentUser) {
+  if (room.users.length >= 2 && lastMessage.text) {
+    if (lastMessage.userId === currentUser._id) return 'Вы: ';
+    return `${users[lastMessage.userId].name.split(' ')[0]}: `;
+  }
+  return '';
+}
+
 function classNameMessage(hasReadMessage) {
   const classes = hasReadMessage ? ' ' : styles.hasReadMessage;
   return `${classes} ${styles.lastMessage}`;
@@ -46,6 +54,9 @@ function ChatsListItem(props) {
         {getChatName(props.room, props.currentUser)}
       </span>
       <span className={classNameMessage(hasReadMessage)}>
+        <span className={styles.lastMessageUsername}>
+          {lastMessage && getLastUsername(lastMessage, props.room, props.users, props.currentUser)}
+        </span>
         {(lastMessage && lastMessage.text) || 'В этом чате пока нет сообщений'}
       </span>
       <span className={styles.lastActivity}>
@@ -66,6 +77,7 @@ ChatsListItem.propTypes = {
   currentUser: PropTypes.shape({
     _id: PropTypes.string,
   }).isRequired,
+  users: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 ChatsListItem.defaultProps = {
