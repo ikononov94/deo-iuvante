@@ -11,7 +11,7 @@ function Popup({
   withCloseButton,
 }) {
   return (
-    <div className={styles.gag} onClick={close}>
+    <div className={styles.gag}>
       <div className={`${styles.popupContainer} ${fullSized ? styles.popupFullSize : ''}`}>
         {children}
         {

@@ -19,8 +19,6 @@ function getChatName(room, currentUser) {
   if (room.users.length === 2) {
     const chatName = room.name.split(', ');
     return chatName.filter(name => name !== currentUser.name).join(' ');
-  } else if (room.users.length > 2) {
-    return 'Беседа';
   }
   return room.name;
 }

@@ -96,13 +96,16 @@ async function createRoom(db, currentUser, room) {
   const users = await db.collection('users')
     .find({ _id: { $in: room.users.map(id => ObjectId(id)) } })
     .toArray();
+  let roomName = '';
+  if (room.name.length) roomName = room.name;
+  else if (users.length === 1) roomName = 'Избранное';
+  else roomName = users.map(user => user.name).join(', ');
 
   const toInsert = {
     ...room,
     messages: [],
     messagesCount: 0,
-    name: users.length === 1 ? 'Избранное' :
-      users.map(user => user.name).join(', '),
+    name: roomName,
   };
 
   return db.collection(COLL).insertOne(toInsert);
