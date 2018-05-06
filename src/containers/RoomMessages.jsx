@@ -11,22 +11,24 @@ class RoomMessages extends Component {
   componentDidMount() {
     this.props.fetchMessages(this.props.roomId);
     this.props.fetchUsers();
+    if (this.props.messages.length &&
+        this.props.messages[this.props.messages.length - 1].userId !== this.props.currentUserId) {
+      this.props.readMessages(this.props.roomId);
+    }
   }
 
   render() {
     return (
-      <React.Fragment>
-        <Chat
-          messages={this.props.messages}
-          currentUserId={this.props.currentUserId}
-          sendMessage={this.props.sendMessage}
-          roomId={this.props.roomId}
-          isFetchingMessages={this.props.isFetchingMessages}
-          users={this.props.users}
-          readMessages={this.props.readMessages}
-          room={this.props.room}
-        />
-      </React.Fragment>
+      <Chat
+        messages={this.props.messages}
+        currentUserId={this.props.currentUserId}
+        sendMessage={this.props.sendMessage}
+        roomId={this.props.roomId}
+        isFetchingMessages={this.props.isFetchingMessages}
+        users={this.props.users}
+        readMessages={this.props.readMessages}
+        room={this.props.room}
+      />
     );
   }
 }
