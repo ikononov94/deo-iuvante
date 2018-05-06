@@ -13,6 +13,8 @@ import IconButton from '../IconButton/IconButton';
 import FormInput from '../FormInput/FormInput';
 import Popup from '../Popup/Popup';
 
+import styles from './CreateChatLayout.module.css';
+
 class CreateChat extends Component {
   constructor(props) {
     super(props);
@@ -112,7 +114,7 @@ class CreateChat extends Component {
                 placeholder="Имя комнаты"
                 onChange={this.handleRoomNameChange}
               />
-              <button onClick={this.createRoom}>
+              <button className={styles.popupCreateRoomButton} onClick={this.createRoom}>
               Создать комнату
               </button>
             </Popup>

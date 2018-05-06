@@ -18,12 +18,13 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    background-color: rgba(255,255,255, .9);
+    background-color: #1d2635;
     padding: .9rem;
-    border: 1px #f3f3f3 solid;
+    border: 1px #1d2635 solid;
     border-radius: 4px;
-    box-shadow: 6px 2px 16px 0 rgba(255,255,255,.3);
-    z-index: 2;
+    box-shadow: 4px 4px 2px 0 rgba(255,255,255,.3);
+    color: #fff;
+    margin: 0 10px;
 }
 
 .popupFullSize {
