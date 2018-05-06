@@ -15,6 +15,10 @@ class MessageInput extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+  componentDidMount() {
+    this.input.focus();
+  }
+
   handleSubmit(event) {
     this.props.sendMessage(this.props.roomId, this.state.value);
 
@@ -35,6 +39,7 @@ class MessageInput extends Component {
           placeholder="Type your message"
           value={this.state.value}
           onChange={this.handleChange}
+          ref={(input) => { this.input = input; }}
         />
         <IconButton
           icon={{
