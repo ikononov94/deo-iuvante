@@ -30,7 +30,7 @@ const Bubble = props => (
     <div className={props.isOwner ? styles.Owner : styles.NotOwner}>
       <div className={styles.BubbleMessage}>
         {!props.isOwner && props.usersCount > 2 && <p className={styles.UserName}>{props.username}</p>}
-        <p>{props.message}</p>
+        <p className={styles.Message}>{props.message}</p>
         <div className={styles.MessageDate}>
           <div className={styles.Checkmark}>{renderMessageState(props.viewState)}</div>
           {renderDate(props.time)}

@@ -98,3 +98,7 @@ p {
   font-size: .7rem;
   align-self: flex-end;
 }
+
+.Message {
+  word-break: break-word;
+}
