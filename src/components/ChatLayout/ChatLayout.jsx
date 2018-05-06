@@ -64,6 +64,10 @@ class ChatLayout extends Component {
           this.state.popupVisible &&
             <Popup close={this.hidePopup} withCloseButton>
               <div>Название комнаты: {chatName}</div>
+              <div>
+                Участники:
+                {room.users.map(userId => this.props.users[userId].name).join(', ')}
+              </div>
               <div>Участников в комнате: {room.users.length}</div>
               <Link to="/">
                 <button className={styles.hidePopup} onClick={this.leaveRoom}>
@@ -82,7 +86,11 @@ const mapDispatchToProps = dispatch => ({
   dispatch,
 });
 
-export default connect(null, mapDispatchToProps)(ChatLayout);
+const mapStateToProps = state => ({
+  users: state.users.byId,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChatLayout);
 
 ChatLayout.propTypes = {
   chatName: PropTypes.string,
@@ -93,6 +101,9 @@ ChatLayout.propTypes = {
     _id: PropTypes.string,
   }),
   leaveRoom: PropTypes.func.isRequired,
+  users: PropTypes.shape({
+    name: PropTypes.string,
+  }).isRequired,
 };
 ChatLayout.defaultProps = {
   chatName: '',
