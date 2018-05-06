@@ -101,7 +101,8 @@ async function createRoom(db, currentUser, room) {
     ...room,
     messages: [],
     messagesCount: 0,
-    name: users.map(user => user.name).join(', '),
+    name: users.length === 1 ? 'Избранное' :
+      users.map(user => user.name).join(', '),
   };
 
   return db.collection(COLL).insertOne(toInsert);

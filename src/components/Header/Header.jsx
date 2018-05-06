@@ -9,10 +9,10 @@ function Header({
   return (
     <div className={`${styles.header} ${className}`}>
       <div className={styles.left_slot}>{left}</div>
-      <div className={styles.text} onClick={showPopup}>
+      <div className={styles.text}>
         {children}
       </div>
-      <div className={styles.right_slot}>{right}</div>
+      <div className={styles.right_slot} onClick={showPopup} >{right}</div>
     </div>
   );
 }

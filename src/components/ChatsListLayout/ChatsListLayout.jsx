@@ -27,7 +27,12 @@ class ChatsList extends Component {
         return this.props.messages[m2[m2.length - 1]].time - this.props.messages[m1[m1.length - 1]].time;
       })
       .map(roomId => (
-        <ChatsListItem room={this.props.rooms[roomId]} messages={this.props.messages} key={roomId} />
+        <ChatsListItem
+          currentUser={this.props.currentUser}
+          room={this.props.rooms[roomId]}
+          messages={this.props.messages}
+          key={roomId}
+        />
       ));
   }
 
@@ -57,6 +62,9 @@ ChatsList.propTypes = {
   roomsIds: PropTypes.arrayOf(PropTypes.string).isRequired,
   fetchRooms: PropTypes.func.isRequired,
   messages: PropTypes.objectOf(PropTypes.object),
+  currentUser: PropTypes.shape({
+    _id: PropTypes.string,
+  }).isRequired,
 };
 
 ChatsList.defaultProps = {
@@ -67,6 +75,7 @@ const mapStateToProps = state => ({
   rooms: state.rooms.byId,
   roomsIds: state.rooms.allIds,
   messages: state.messages.byId,
+  currentUser: state.currentUser.data,
 });
 
 export default connect(mapStateToProps, { fetchRooms })(ChatsList);

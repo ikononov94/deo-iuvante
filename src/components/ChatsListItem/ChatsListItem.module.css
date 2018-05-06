@@ -20,6 +20,9 @@
     font-size: 1.1rem;
     align-self: center;
     color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .lastMessage {

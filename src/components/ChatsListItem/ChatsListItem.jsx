@@ -15,6 +15,16 @@ function prettifyLastActivity(lastActivity) {
   });
 }
 
+function getChatName(room, currentUser) {
+  if (room.users.length === 2) {
+    const chatName = room.name.split(', ');
+    return chatName.filter(name => name !== currentUser.name).join(' ');
+  } else if (room.users.length > 2) {
+    return 'Беседа';
+  }
+  return room.name;
+}
+
 function classNameMessage(hasReadMessage) {
   const classes = hasReadMessage ? ' ' : styles.hasReadMessage;
   return `${classes} ${styles.lastMessage}`;
@@ -31,11 +41,11 @@ function ChatsListItem(props) {
     <Link to={`/chat/${props.room._id}`} className={styles.listItem}>
       <Avatar
         size="m"
-        avatarName={props.room.name ? props.room.name.slice(0, 2) : 'R'}
+        avatarName={props.room.name ? getChatName(props.room, props.currentUser) : 'R'}
         className={styles.avatar}
       />
       <span className={styles.roomName}>
-        {props.room.name}
+        {getChatName(props.room, props.currentUser)}
       </span>
       <span className={classNameMessage(hasReadMessage)}>
         {(lastMessage && lastMessage.text) || 'В этом чате пока нет сообщений'}
@@ -55,6 +65,9 @@ ChatsListItem.propTypes = {
     messages: PropTypes.array,
   }).isRequired,
   messages: PropTypes.objectOf(PropTypes.object),
+  currentUser: PropTypes.shape({
+    _id: PropTypes.string,
+  }).isRequired,
 };
 
 ChatsListItem.defaultProps = {
