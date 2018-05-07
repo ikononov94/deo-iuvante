@@ -36,7 +36,6 @@ export const fetchMessages = roomId => (
 export const addMessage = message => (
   (dispatch, getState) => {
     let payload = {};
-
     const { rooms } = getState();
     const room = rooms.byId[message.roomId];
     if (room.users.length === 1) {

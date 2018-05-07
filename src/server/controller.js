@@ -202,6 +202,7 @@ module.exports = function (db, io) {
 
       leaveRoomChannel(payload.roomId);
       userLeaveRoom(params);
+      return params;
     }));
 
     // Send message

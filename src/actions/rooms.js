@@ -1,15 +1,32 @@
 import * as ActionTypes from './types';
 import api from '../api';
+import { sendMessage } from './messages';
 
 export const fetchRooms = () => (dispatch) => {
   api.getRooms()
     .then(rooms => dispatch({ type: ActionTypes.FETCH_ROOMS_SUCCESS, payload: rooms }));
 };
 
-export const leaveRoom = roomId => (dispatch) => {
-  api.currentUserLeaveRoom(roomId)
-    .then(room => dispatch({ type: ActionTypes.CURRENT_USER_LEAVE_ROOM, payload: room }));
-};
+export const leaveRoom = roomId => (
+  async (dispatch, getState) => {
+    const { currentUser } = getState();
+    dispatch(sendMessage(roomId, `Пользователь ${currentUser.data.name} покинул комнату`));
+
+    const room = await api.currentUserLeaveRoom(roomId);
+    dispatch({ type: ActionTypes.CURRENT_USER_LEAVE_ROOM, payload: room });
+  }
+);
+
+export const userLeavedRoom = ({ roomId, userId }) => (
+  (dispatch, getState) => {
+    const { rooms } = getState();
+    const room = {
+      ...rooms.byId[roomId],
+      users: rooms.byId[roomId].users.filter(id => id !== userId),
+    };
+    dispatch({ type: ActionTypes.USER_LEAVE_ROOM, payload: room });
+  }
+);
 
 export const fetchRoom = roomId => (
   async (dispatch) => {

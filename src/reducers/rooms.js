@@ -68,6 +68,21 @@ const rooms = (
         byId,
       });
     }
+    case types.USER_LEAVE_ROOM: {
+      const byId = {};
+      Object.keys(state.byId).forEach((id) => {
+        if (id === action.payload._id) {
+          byId[id] = action.payload;
+        } else {
+          byId[id] = state.byId[id];
+        }
+      });
+
+      return ({
+        ...state,
+        byId,
+      });
+    }
     default: return state;
   }
 };
