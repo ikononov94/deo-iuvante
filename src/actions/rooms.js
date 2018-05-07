@@ -9,10 +9,12 @@ export const fetchRooms = () => (dispatch) => {
 
 export const leaveRoom = roomId => (
   async (dispatch, getState) => {
-    const { currentUser } = getState();
-    dispatch(sendMessage(roomId, `Пользователь ${currentUser.data.name} покинул комнату`));
-
-    const room = await api.currentUserLeaveRoom(roomId);
+    const { currentUser, rooms } = getState();
+    let room = rooms.byId[roomId];
+    if (room.users.length !== 1) {
+      dispatch(sendMessage(roomId, `Пользователь ${currentUser.data.name} покинул комнату`));
+    }
+    room = await api.currentUserLeaveRoom(roomId);
     dispatch({ type: ActionTypes.CURRENT_USER_LEAVE_ROOM, payload: room });
   }
 );
