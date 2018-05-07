@@ -52,6 +52,9 @@ class CreateChat extends Component {
   }
 
   showPopup() {
+    if (!this.state.selectedUsers.length &&
+        Object.values(this.props.rooms).filter(room => room.name === 'Избранное').length) return;
+
     if (this.state.selectedUsers.length < 2) {
       this.createRoom();
       return;
@@ -126,16 +129,19 @@ class CreateChat extends Component {
 
 function mapStateToProps(state) {
   const currentUserId = state.currentUser.data._id,
-    users = Object.keys(state.users.byId).filter(_id => _id !== currentUserId).map(_id => state.users.byId[_id]);
+    users = Object.keys(state.users.byId).filter(_id => _id !== currentUserId).map(_id => state.users.byId[_id]),
+    rooms = state.rooms.byId;
 
   return ({
     users,
+    rooms,
   });
 }
 
 CreateChat.propTypes = {
   users: PropTypes.arrayOf(PropTypes.object).isRequired,
   fetchUsers: PropTypes.func.isRequired,
+  rooms: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 export default connect(mapStateToProps, { fetchUsers })(CreateChat);

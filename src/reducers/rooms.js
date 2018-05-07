@@ -55,21 +55,18 @@ const rooms = (
       });
     }
     case types.CURRENT_USER_LEAVE_ROOM: {
-      if (!action.payload.users.length) {
-        const allIds = state.allIds.filter(id => id !== action.payload._id);
-        const byId = {};
-        Object.keys(state.byId).forEach((id) => {
-          if (id !== action.payload._id) {
-            byId[id] = state.byId[id];
-          }
-        });
-        return ({
-          ...state,
-          allIds,
-          byId,
-        });
-      }
-      return state;
+      const allIds = state.allIds.filter(id => id !== action.payload._id);
+      const byId = {};
+      Object.keys(state.byId).forEach((id) => {
+        if (id !== action.payload._id) {
+          byId[id] = state.byId[id];
+        }
+      });
+      return ({
+        ...state,
+        allIds,
+        byId,
+      });
     }
     default: return state;
   }
