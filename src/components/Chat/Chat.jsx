@@ -10,6 +10,9 @@ import ViewportSpinner from '../ViewportSpinner/ViewportSpinner';
 export default class Chat extends Component {
   componentDidUpdate(prevProps) {
     if (prevProps.messages.length !== this.props.messages.length) {
+      if (this.props.room.users.length === 1) {
+        this.props.readMessages(this.props.roomId);
+      }
       if (this.props.messages[this.props.messages.length - 1].userId !== this.props.currentUserId) {
         this.props.readMessages(this.props.roomId);
       }

@@ -33,10 +33,24 @@ export const fetchMessages = roomId => (
   }
 );
 
-export const addMessage = payload => ({
-  type: ActionTypes.ADD_MESSAGE,
-  payload,
-});
+export const addMessage = message => (
+  (dispatch, getState) => {
+    let payload = {};
+
+    const { rooms } = getState();
+    const room = rooms.byId[message.roomId];
+    if (room.users.length === 1) {
+      payload = {
+        ...message,
+        read: true,
+      };
+    } else payload = message;
+
+    dispatch({
+      type: ActionTypes.ADD_MESSAGE,
+      payload,
+    });
+  });
 
 export const sendMessage = (roomId, message) => (
   async (dispatch) => {

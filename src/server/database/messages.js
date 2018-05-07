@@ -90,7 +90,7 @@ async function markAllUnread(db, user, roomId) {
     .collection('messages')
     .updateMany({
       _id: { $in: room.messages.map(id => ObjectId(id)) },
-      userId: { $ne: user._id.toString() },
+      userId: room.users.length === 1 ? user._id.toString() : { $ne: user._id.toString() },
       read: false,
     }, {
       $set: {
