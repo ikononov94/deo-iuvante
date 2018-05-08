@@ -29,14 +29,14 @@ const Bubble = props => (
   <div className={styles.Bubble} key={props.time}>
     <div className={props.isOwner ? styles.Owner : styles.NotOwner}>
       <div className={styles.BubbleMessage}>
-        {!props.isOwner && props.usersCount > 2 && <p className={styles.UserName}>{props.username}</p>}
+        {!props.isOwner && <p className={styles.UserName}>{props.username}</p>}
         <p className={styles.Message}>{props.message}</p>
         <div className={styles.MessageDate}>
           <div className={styles.Checkmark}>{renderMessageState(props.viewState)}</div>
           {renderDate(props.time)}
         </div>
       </div>
-      {!props.isOwner && props.usersCount > 2 && <Avatar
+      {!props.isOwner && <Avatar
         className={styles.Avatar}
         src={props.avatarUrl}
         avatarName={props.username}
