@@ -53,7 +53,6 @@ Bubble.propTypes = {
   avatarUrl: PropTypes.string,
   message: PropTypes.string.isRequired,
   isOwner: PropTypes.bool,
-  usersCount: PropTypes.number.isRequired,
 };
 
 Bubble.defaultProps = {

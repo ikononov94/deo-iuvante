@@ -8,9 +8,6 @@ import ChatFooter from '../ChatFooter/ChatFooter';
 import ViewportSpinner from '../ViewportSpinner/ViewportSpinner';
 
 export default class Chat extends Component {
-  componentDidMount() {
-    this.props.readMessages(this.props.roomId);
-  }
   componentDidUpdate(prevProps) {
     if (prevProps.messages.length !== this.props.messages.length) {
       if (this.props.room.users.length === 1) {
@@ -36,7 +33,6 @@ export default class Chat extends Component {
         key={message._id}
         time={message.time}
         username={this.props.users.byId[message.userId] ? this.props.users.byId[message.userId].name : ''}
-        usersCount={this.props.room.users.length}
       />
     );
 
