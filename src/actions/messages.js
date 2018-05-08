@@ -61,12 +61,13 @@ export const sendMessage = (roomId, message) => (
 
 export const readMessages = roomId => (
   (dispatch, getState) => {
-    const { rooms } = getState();
+    const { rooms, messages, currentUser } = getState();
     const room = rooms.byId[roomId];
+    const messagesIds = room.messages.filter(id => messages.byId[id] !== currentUser.data._id);
 
     dispatch({
       type: ActionTypes.READ_MESSAGES,
-      payload: room.messages,
+      payload: messagesIds,
     });
   }
 );
