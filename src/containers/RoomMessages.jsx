@@ -10,7 +10,7 @@ import { markAllUnreadMessages } from '../actions/rooms';
 class RoomMessages extends Component {
   componentDidMount() {
     this.props.fetchMessages(this.props.roomId);
-    this.props.fetchUsers();
+    // this.props.fetchUsers();
     if (this.props.messages.length &&
         this.props.messages[this.props.messages.length - 1].userId !== this.props.currentUserId) {
       this.props.readMessages(this.props.roomId);
@@ -74,7 +74,6 @@ RoomMessages.propTypes = {
   users: PropTypes.shape({
     fetching: PropTypes.bool,
   }).isRequired,
-  fetchUsers: PropTypes.func.isRequired,
   room: PropTypes.shape({
     _id: PropTypes.string,
   }).isRequired,
