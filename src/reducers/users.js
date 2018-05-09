@@ -45,6 +45,18 @@ export default (
         }), { ...state.byId }),
       });
     }
+    case types.USER_CHANGE_STATUS: {
+      return ({
+        ...state,
+        byId: {
+          ...state.byId,
+          [action.payload.userId]: {
+            ...state.byId[action.payload.userId],
+            online: action.payload.status,
+          },
+        },
+      });
+    }
     default: return state;
   }
 };
