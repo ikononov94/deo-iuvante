@@ -1,13 +1,18 @@
 .footer {
   display: flex;
   align-items: center;
-  background-color: #f7f7f7;
+  background-color: #233342;
 
   padding: 3px 0 3px 0;
 
-  border-top: 1px solid lightgray;
 }
 
 .messageInput {
+  display: flex;
+  align-items: center;
+  padding-left: 6px;
+}
+
+.messageInput:first-child {
   flex: 2;
 }

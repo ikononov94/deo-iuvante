@@ -10,6 +10,10 @@ import { fetchUsers } from '../../actions/users';
 import UsersList from '../UsersList/UsersList';
 import AppLayout from '../AppLayout/AppLayout';
 import IconButton from '../IconButton/IconButton';
+import FormInput from '../FormInput/FormInput';
+import Popup from '../Popup/Popup';
+
+import styles from './CreateChatLayout.module.css';
 
 class CreateChat extends Component {
   constructor(props) {
@@ -18,10 +22,15 @@ class CreateChat extends Component {
     this.state = {
       selectedUsers: [],
       newRoomId: null,
+      popupVisible: false,
+      roomName: '',
     };
 
     this.switchUserSelection = this.switchUserSelection.bind(this);
     this.createRoom = this.createRoom.bind(this);
+    this.showPopup = this.showPopup.bind(this);
+    this.hidePopup = this.hidePopup.bind(this);
+    this.handleRoomNameChange = this.handleRoomNameChange.bind(this);
   }
 
   componentWillMount() {
@@ -42,9 +51,29 @@ class CreateChat extends Component {
     }
   }
 
+  showPopup() {
+    if (!this.state.selectedUsers.length &&
+        Object.values(this.props.rooms).filter(room => room.name === 'Избранное').length) return;
+
+    if (this.state.selectedUsers.length < 2) {
+      this.createRoom();
+      return;
+    }
+    this.setState({ popupVisible: true });
+  }
+
+  hidePopup() {
+    this.setState({ popupVisible: false });
+  }
+
+  handleRoomNameChange(event) {
+    this.setState({ roomName: event.target.value });
+  }
+
   createRoom() {
     api.createRoom({
       users: this.state.selectedUsers,
+      name: this.state.roomName.trim(),
     })
       .then(({ _id }) => {
         this.setState({
@@ -64,7 +93,7 @@ class CreateChat extends Component {
         headerText="Выберите пользователей"
         headerRight={(<IconButton
           icon={{ glyph: 'check', color: '#00a000' }}
-          onClick={this.createRoom}
+          onClick={this.showPopup}
         />)}
         headerLeft={(<IconButton
           icon={{ glyph: 'keyboard_arrow_left', color: '#fff' }}
@@ -80,6 +109,19 @@ class CreateChat extends Component {
           />
           {this.renderRedirect()}
         </React.Fragment>
+        {
+          this.state.popupVisible &&
+            <Popup close={this.hidePopup} withCloseButton>
+              <FormInput
+                label="Введите имя комнаты:"
+                placeholder="Имя комнаты"
+                onChange={this.handleRoomNameChange}
+              />
+              <button className={styles.popupCreateRoomButton} onClick={this.createRoom}>
+              Создать комнату
+              </button>
+            </Popup>
+        }
       </AppLayout>
     );
   }
@@ -87,16 +129,19 @@ class CreateChat extends Component {
 
 function mapStateToProps(state) {
   const currentUserId = state.currentUser.data._id,
-    users = Object.keys(state.users.byId).filter(_id => _id !== currentUserId).map(_id => state.users.byId[_id]);
+    users = Object.keys(state.users.byId).filter(_id => _id !== currentUserId).map(_id => state.users.byId[_id]),
+    rooms = state.rooms.byId;
 
   return ({
     users,
+    rooms,
   });
 }
 
 CreateChat.propTypes = {
   users: PropTypes.arrayOf(PropTypes.object).isRequired,
   fetchUsers: PropTypes.func.isRequired,
+  rooms: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 export default connect(mapStateToProps, { fetchUsers })(CreateChat);

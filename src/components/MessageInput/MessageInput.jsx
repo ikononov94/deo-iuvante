@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import IconButton from '../IconButton/IconButton';
+
 import './MessageInput.css';
 
 class MessageInput extends Component {
@@ -13,12 +15,17 @@ class MessageInput extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+  componentDidMount() {
+    this.input.focus();
+  }
+
   handleSubmit(event) {
-    this.props.sendMessage(this.props.roomId, this.state.value);
-
-    this.setState({ value: '' });
-
     event.preventDefault();
+
+    if (!this.state.value.trim()) return;
+
+    this.props.sendMessage(this.props.roomId, this.state.value);
+    this.setState({ value: '' });
   }
 
   handleChange(event) {
@@ -33,6 +40,13 @@ class MessageInput extends Component {
           placeholder="Type your message"
           value={this.state.value}
           onChange={this.handleChange}
+          ref={(input) => { this.input = input; }}
+        />
+        <IconButton
+          icon={{
+            color: '#a9d18b',
+            glyph: 'send',
+          }}
         />
       </form>
     );

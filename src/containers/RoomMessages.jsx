@@ -10,22 +10,10 @@ import { markAllUnreadMessages } from '../actions/rooms';
 class RoomMessages extends Component {
   componentDidMount() {
     this.props.fetchMessages(this.props.roomId);
-    this.props.fetchUsers();
-  }
-
-  componentDidUpdate() {
-    this.clearTimeout();
-
-    this.timeout = setTimeout(() => this.props.readMessages(this.props.roomId), 500);
-  }
-
-  componentWillUnmount() {
-    this.clearTimeout();
-  }
-
-  clearTimeout() {
-    // eslint-disable-next-line no-unused-expressions
-    this.timeout && clearTimeout(this.timeout);
+    if (this.props.messages.length &&
+        this.props.messages[this.props.messages.length - 1].userId !== this.props.currentUserId) {
+      this.props.readMessages(this.props.roomId);
+    }
   }
 
   render() {
@@ -37,6 +25,8 @@ class RoomMessages extends Component {
         roomId={this.props.roomId}
         isFetchingMessages={this.props.isFetchingMessages}
         users={this.props.users}
+        readMessages={this.props.readMessages}
+        room={this.props.room}
       />
     );
   }
@@ -80,6 +70,10 @@ RoomMessages.propTypes = {
   readMessages: PropTypes.func.isRequired,
   isFetchingMessages: PropTypes.bool,
   messages: PropTypes.arrayOf(PropTypes.object),
-  users: PropTypes.arrayOf(PropTypes.object).isRequired,
-  fetchUsers: PropTypes.func.isRequired,
+  users: PropTypes.shape({
+    fetching: PropTypes.bool,
+  }).isRequired,
+  room: PropTypes.shape({
+    _id: PropTypes.string,
+  }).isRequired,
 };

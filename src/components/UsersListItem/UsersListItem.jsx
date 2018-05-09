@@ -20,7 +20,7 @@ function UsersListItem({
         {name}
       </span>
       <span className={styles.onlineMark}>
-        {online ? 'online' : ''}
+        {online ? 'online' : 'offline'}
       </span>
       <span className={styles.phone}>
         {phone}
@@ -30,7 +30,7 @@ function UsersListItem({
       </span>
       <Icon
         className={styles.selectedIcon}
-        color={selected ? '#00b33c' : '#777'}
+        color={selected ? '#1d2635 ' : '#fff'}
         glyph={selected ? 'check_circle_outline' : 'add_circle_outline'}
       />
     </div>

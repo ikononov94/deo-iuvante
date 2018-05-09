@@ -54,6 +54,35 @@ const rooms = (
         },
       });
     }
+    case types.CURRENT_USER_LEAVE_ROOM: {
+      const allIds = state.allIds.filter(id => id !== action.payload._id);
+      const byId = {};
+      Object.keys(state.byId).forEach((id) => {
+        if (id !== action.payload._id) {
+          byId[id] = state.byId[id];
+        }
+      });
+      return ({
+        ...state,
+        allIds,
+        byId,
+      });
+    }
+    case types.USER_LEAVE_ROOM: {
+      const byId = {};
+      Object.keys(state.byId).forEach((id) => {
+        if (id === action.payload._id) {
+          byId[id] = action.payload;
+        } else {
+          byId[id] = state.byId[id];
+        }
+      });
+
+      return ({
+        ...state,
+        byId,
+      });
+    }
     default: return state;
   }
 };

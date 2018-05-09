@@ -6,7 +6,9 @@
   bottom: 0;
   left: 0;
 
-  font-size: 100px;
+  background-color: #233342;
 
-  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

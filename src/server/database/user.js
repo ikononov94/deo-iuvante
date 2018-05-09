@@ -51,6 +51,7 @@ async function findUserBySid(db, sid) {
       name: '',
       email: '',
       phone: '',
+      online: true,
     };
 
     user = await saveUser(db, user);
