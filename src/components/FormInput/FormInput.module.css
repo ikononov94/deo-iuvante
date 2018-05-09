@@ -8,10 +8,6 @@
   font-size: 1.2rem;
 }
 
-.label:hover {
-  background-color: #fff;
-}
-
 .input {
   box-sizing: border-box;
   width: 100%;
@@ -20,9 +16,11 @@
   line-height: 2;
   font-size: 1rem;
   border: none;
-  border-top: 2px solid #c3c3c3;
-  border-bottom: 2px solid #c3c3c3;
+  background-color: #233342;
+  border-top: 2px solid #1d2635;
+  border-bottom: 2px solid #1d2635;
   color: #00bff3;
+  transition: all .3s ease;
 }
 
 .input:focus {

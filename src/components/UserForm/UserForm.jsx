@@ -41,7 +41,7 @@ class UserForm extends React.Component {
 
     const { isSubmitting, onSubmit } = this.props;
 
-    if (isSubmitting) return;
+    if (isSubmitting || !this.state.values.name) return;
 
     onSubmit(this.state.values);
   }

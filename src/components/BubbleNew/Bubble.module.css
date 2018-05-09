@@ -22,28 +22,31 @@ p {
 }
 
 .BubbleMessage {
-  padding: .8rem;
-  background-color: #f3f3f3;
-  border-radius: .4rem;
+  padding: .3rem .6rem;
+  color: #fff;
+  border-radius: .2rem;
   position: relative;
-  max-width: calc(100% - 9.5rem);
+  max-width: calc(100% - 5.5rem);
+  display: flex;
+  flex-direction: column;
 }
 
 .Owner .BubbleMessage {
-  background-color: #00bef3;
+  background-color: #536dfe;
   color: #fff;
   margin-right: 5px;
 }
 
 .NotOwner .BubbleMessage {
   margin-left: 5px;
+  background-color: #28374e;
 }
 
 .Owner .BubbleMessage:after {
   content: '';
   display: block;
   border: 5px solid transparent;
-  border-left: 5px solid #00bef3;
+  border-left: 5px solid #536dfe;
   position: absolute;
   bottom: 10px;
   right: -10px;
@@ -53,7 +56,7 @@ p {
   content: '';
   display: block;
   border: 5px solid transparent;
-  border-right: 5px solid #f3f3f3;
+  border-right: 5px solid #28374e;
   position: absolute;
   bottom: 10px;
   left: -10px;
@@ -67,6 +70,7 @@ p {
   font-weight: bold;
   color: #fe8203;
   margin-bottom: .4rem;
+  font-size: .8rem;
 }
 
 .Owner .UserName {
@@ -76,13 +80,13 @@ p {
 .Owner .Checkmark{
   display: inline-block;
   padding-right: .4rem;
-  margin-bottom: 1rem;
 }
 .Avatar {
-  width: 4rem;
-  height: 4rem;
-  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
   overflow: hidden;
+  display: flex;
+  align-items: flex-end;
 }
 
 .Avatar img {
@@ -91,6 +95,10 @@ p {
 
 .MessageDate {
   font-size: .7rem;
-  text-align: right;
-  margin-top: 5px;
+  align-self: flex-end;
+}
+
+.Message {
+  display: inline-block;
+  word-break: break-word;
 }

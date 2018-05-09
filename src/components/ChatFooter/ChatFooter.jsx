@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import IconButton from '../IconButton/IconButton';
 import MessageInput from '../MessageInput/MessageInput';
 
 import styles from './ChatFooter.module.css';
@@ -18,13 +17,6 @@ class ChatFooter extends React.PureComponent {
           sendMessage={sendMessage}
           className={styles.messageInput}
           roomId={this.props.roomId}
-        />
-        <IconButton
-          onClick={sendMessage}
-          icon={{
-            color: '#a9d18b',
-            glyph: 'send',
-          }}
         />
       </div>
     );

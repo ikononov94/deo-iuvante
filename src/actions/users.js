@@ -52,3 +52,21 @@ export const fetchUser = id => (
     }
   }
 );
+
+export const userChangeStatus = user => (
+  (dispatch) => {
+    dispatch({
+      type: types.USER_CHANGE_STATUS,
+      payload: user,
+    });
+  }
+);
+
+export const updateUser = user => (
+  (dispatch) => {
+    dispatch({
+      type: types.USER_UPDATE,
+      payload: user,
+    });
+  }
+);

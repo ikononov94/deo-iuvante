@@ -10,6 +10,12 @@ import ViewportSpinner from '../ViewportSpinner/ViewportSpinner';
 export default class Chat extends Component {
   componentDidUpdate(prevProps) {
     if (prevProps.messages.length !== this.props.messages.length) {
+      if (this.props.room.users.length === 1) {
+        this.props.readMessages(this.props.roomId);
+      }
+      if (this.props.messages[this.props.messages.length - 1].userId !== this.props.currentUserId) {
+        this.props.readMessages(this.props.roomId);
+      }
       if (this.container) this.container.scrollTop = this.container.scrollHeight;
     }
   }
@@ -69,7 +75,14 @@ Chat.propTypes = {
   messages: PropTypes.arrayOf(PropTypes.object),
   currentUserId: PropTypes.string.isRequired,
   sendMessage: PropTypes.func,
+  readMessages: PropTypes.func.isRequired,
   roomId: PropTypes.string.isRequired,
   isFetchingMessages: PropTypes.bool,
-  users: PropTypes.arrayOf(PropTypes.object).isRequired,
+  users: PropTypes.shape({
+    fetching: PropTypes.bool,
+    byId: PropTypes.objectOf(PropTypes.object),
+  }).isRequired,
+  room: PropTypes.shape({
+    users: PropTypes.arrayOf(PropTypes.string),
+  }).isRequired,
 };

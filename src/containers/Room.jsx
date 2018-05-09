@@ -5,6 +5,14 @@ import { openRoom } from '../actions/rooms';
 
 import ChatLayout from '../components/ChatLayout/ChatLayout';
 
+function getChatName(room, currentUser) {
+  if (room.users.length === 2) {
+    const chatName = room.name.split(', ');
+    return chatName.filter(name => name !== currentUser.name).join(' ');
+  }
+  return room.name;
+}
+
 class Room extends Component {
   componentDidMount() {
     const { match } = this.props;
@@ -13,14 +21,15 @@ class Room extends Component {
   }
 
   render() {
-    const { room } = this.props;
+    const { room, currentUser } = this.props;
 
     if (room) {
       return (
         <ChatLayout
-          chatName={room.name}
+          chatName={getChatName(room, currentUser)}
           roomId={room._id}
-          chatNameAvatar={room.name ? room.name.slice(0, 2) : 'R'}
+          chatNameAvatar={room.name ? getChatName(room, currentUser) : 'R'}
+          room={room}
         />
       );
     }
@@ -36,6 +45,7 @@ class Room extends Component {
 
 const mapStateToProps = (state, { match }) => ({
   room: state.rooms.byId[match.params.id],
+  currentUser: state.currentUser.data,
 });
 
 export default connect(mapStateToProps, { openRoom })(Room);
@@ -49,5 +59,8 @@ Room.propTypes = {
     params: PropTypes.shape({
       id: PropTypes.string.isRequired,
     }).isRequired,
+  }).isRequired,
+  currentUser: PropTypes.shape({
+    _id: PropTypes.string,
   }).isRequired,
 };

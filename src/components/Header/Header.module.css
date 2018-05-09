@@ -1,16 +1,16 @@
 .header {
-    background-color: rgba(0,191,243,.9);
+    background-color: #1d2635;
     display: flex;
     justify-content: space-between;
     flex-wrap: nowrap;
     align-items: center;
-    height: 4rem;
+    height: 3rem;
     max-width: 100vw;
 }
 
-.left_slot, .right_slot, .text {
+/* .left_slot, .right_slot, .text {
     margin: auto 1.5vw;
-}
+} */
 
 .left_slot, .right_slot {
     cursor: pointer;
@@ -19,10 +19,14 @@
     font-size: 1rem;
 }
 
+.right_slot {
+    margin-right: 6px;
+}
+
 .text {
     color: #fff;
     font-weight: 500;
-    font-size: 23px;
+    font-size: 1.3rem;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

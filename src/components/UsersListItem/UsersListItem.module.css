@@ -1,20 +1,19 @@
 .listItem {
     display: grid;
     padding: .3rem;
-    grid-template-columns: 100px auto auto;
-    grid-template-rows: 2rem auto 2rem;
+    grid-template-columns: 70px auto auto;
+    grid-template-rows: 1rem 1rem 1rem;
     grid-gap: .5rem;
-    border-bottom: 1px #ccc solid;
+    border-bottom: 1px #1d2635  solid;
 }
 
 .selectedItem {
-    background-color: #f3f3f3;
+    background-color: #025618;
 }
 
 .avatar {
     grid-column: 1 / 2;
     grid-row: 1 / 4;
-    align-self: center;
     justify-self: center;
 }
 
@@ -23,12 +22,13 @@
     grid-row: 1 / 3;
     font-weight: bold;
     font-size: 1.1rem;
+    color: #fff;
 }
 
 .phone {
     grid-column: 2 / 3;
     grid-row: 3 / 4;
-    font-size: .6rem;
+    font-size: .8rem;
     color: #777;
     align-self: center;
 }
@@ -36,7 +36,7 @@
 .email {
     grid-column: 3 / 4;
     grid-row: 3 / 4;
-    font-size: .6rem;
+    font-size: .8rem;
     color: #777;
     align-self: center;
 }

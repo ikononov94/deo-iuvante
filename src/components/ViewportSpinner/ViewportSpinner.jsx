@@ -1,17 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import styles from './ViewportSpinner.module.css';
-import Spinner from '../Spinner/Spinner';
+import Bouncer from '../Bouncer/Bouncer';
 
-const ViewportSpinner = ({ size }) => <Spinner size={size} className={styles.viewportSpinner} />;
+const ViewportSpinner = () => <Bouncer className={styles.viewportSpinner} />;
 
 export default ViewportSpinner;
-
-ViewportSpinner.defaultProps = {
-  size: 'xl',
-};
-
-ViewportSpinner.propTypes = {
-  size: PropTypes.string,
-};
