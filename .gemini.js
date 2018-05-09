@@ -1,5 +1,5 @@
 module.exports = {
-  rootUrl: 'https://deo-iuvante-test.herokuapp.com',
+  rootUrl: 'https://ikononov-deo-iuvante-test.herokuapp.com',
   gridUrl: 'http://localhost:4444/wd/hub',
   compositeImage: true,
   windowSize: '360x772',
