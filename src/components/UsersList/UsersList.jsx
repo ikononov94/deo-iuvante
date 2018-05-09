@@ -7,14 +7,17 @@ import UsersListItem from '../UsersListItem/UsersListItem';
 function UsersList({ users, selectedUsers, switchUserSelection }) {
   return (
     <List>
-      {users.map(user => (
-        <UsersListItem
-          {...user}
-          key={user._id}
-          onClick={() => switchUserSelection.call(null, user._id)}
-          selected={selectedUsers.indexOf(user._id) !== -1}
-        />
-      ))}
+      {users.map((user) => {
+        if (user.name) {
+          return (
+            <UsersListItem
+              {...user}
+              key={user._id}
+              onClick={() => switchUserSelection.call(null, user._id)}
+              selected={selectedUsers.indexOf(user._id) !== -1}
+            />);
+        } return null;
+})}
     </List>
   );
 }
