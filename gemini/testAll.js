@@ -3,7 +3,7 @@
 gemini.suite('loginPage', (suite) => {
   suite
     .setUrl('/first-time')
-    .setCaptureElements('.src-components-FirstTime-__FirstTime-module___firstTime')
+    .setCaptureElements('html')
     .capture('Исходное состояние', actions => actions.wait(2000))
     .capture('Поле с именем в фокусе', (actions) => {
       actions.focus('#name');
