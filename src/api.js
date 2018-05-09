@@ -291,6 +291,12 @@ class Api {
 
     this.io.on(MESSAGES.NEW_ROOM, callback);
   }
+
+  async onUpdateUser(callback) {
+    await this._connectPromise;
+
+    this.io.on(MESSAGES.NEW_USER, callback);
+  }
 }
 
 

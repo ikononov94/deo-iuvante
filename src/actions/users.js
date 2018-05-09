@@ -61,3 +61,12 @@ export const userChangeStatus = user => (
     });
   }
 );
+
+export const updateUser = user => (
+  (dispatch) => {
+    dispatch({
+      type: types.USER_UPDATE,
+      payload: user,
+    });
+  }
+);

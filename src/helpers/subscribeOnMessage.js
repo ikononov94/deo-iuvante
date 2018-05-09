@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { addMessage, readMessages } from '../actions/messages';
 import { fetchRoom, userLeavedRoom } from '../actions/rooms';
-import { userChangeStatus } from '../actions/users';
+import { userChangeStatus, updateUser } from '../actions/users';
 
 import api from '../api';
 
@@ -15,6 +15,7 @@ export default (WrappedComponent) => {
       this.readMessages = this.readMessages.bind(this);
       this.userLeavedRoom = this.userLeavedRoom.bind(this);
       this.userChangeStatus = this.userChangeStatus.bind(this);
+      this.updateUser = this.updateUser.bind(this);
     }
 
     componentDidMount() {
@@ -27,11 +28,17 @@ export default (WrappedComponent) => {
       api.onUserChangeStatus(this.userChangeStatus);
 
       api.onNewRoom(roomId => this.props.dispatch(fetchRoom(roomId)));
+
+      api.onUpdateUser(this.updateUser);
     }
 
     componentWillUnmount() {
       api.offMessage();
       api.offMessagesRead();
+    }
+
+    updateUser(user) {
+      this.props.dispatch(updateUser(user));
     }
 
     userLeavedRoom(params) {

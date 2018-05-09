@@ -132,7 +132,10 @@ module.exports = function (db, io) {
 
     // Update user information
     socket.on(TYPES.UPDATE_USER, wrapCallback(async ({ requestId, payload }) => {
-      socket.emit(TYPES.UPDATE_USER, { requestId, payload: await saveUser(db, payload) });
+      const newUser = await saveUser(db, payload);
+
+      socket.emit(TYPES.UPDATE_USER, { requestId, payload: newUser });
+      socket.broadcast.emit(TYPES.NEW_USER, newUser);
     }));
 
     // Return list of all users with

@@ -57,6 +57,15 @@ export default (
         },
       });
     }
+    case types.USER_UPDATE: {
+      return ({
+        ...state,
+        byId: {
+          ...state.byId,
+          [action.payload._id]: action.payload,
+        },
+      });
+    }
     default: return state;
   }
 };
