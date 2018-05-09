@@ -26,6 +26,9 @@ function getChatName(room, currentUser) {
 function getLastUsername(lastMessage, room, users, currentUser) {
   if (room.users.length >= 2 && lastMessage.text) {
     if (lastMessage.userId === currentUser._id) return 'Вы: ';
+
+    if (room.users.length === 2) return '';
+
     return `${users[lastMessage.userId].name.split(' ')[0]}: `;
   }
   return '';
