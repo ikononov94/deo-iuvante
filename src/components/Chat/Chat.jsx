@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import styles from './Chat.module.css';
 
-import MessageBubble from '../BubbleNew/Bubble';
+import MessageBubble from '../Bubble/Bubble';
 import ChatFooter from '../ChatFooter/ChatFooter';
 import ViewportSpinner from '../ViewportSpinner/ViewportSpinner';
 
