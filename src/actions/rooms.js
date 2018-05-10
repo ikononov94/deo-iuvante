@@ -56,21 +56,6 @@ export const fetchRoom = roomId => (
   }
 );
 
-export const markAllUnreadMessages = roomId => (
-  async (dispatch, getState) => {
-    api.markAllUnreadMessages(roomId);
-
-    const { rooms, currentUser } = getState();
-    const room = rooms.byId[roomId];
-
-    dispatch({
-      type: ActionTypes.READ_MESSAGES_FOR_CURRENT_USER,
-      payload: room.messages,
-      currentUserId: currentUser.data._id,
-    });
-  }
-);
-
 export const openRoom = roomId => (
   (dispatch, getState) => {
     const { rooms } = getState();
