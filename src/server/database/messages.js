@@ -39,13 +39,16 @@ async function sendMessage(db, user, message) {
     throw new Error(`Cannot find room with id=${message.roomId}`);
   }
 
+  const attachments = {};
+
+  room.users.forEach((id) => { attachments[id] = { read: false }; });
+
   const messageEntity = {
     userId: user._id.toString(),
     roomId: message.roomId,
     text: message.text,
     time: Date.now(),
-    attachments: message.attachments || null,
-    read: false,
+    attachments,
   };
 
   const { insertedId } = await db.collection('messages').insertOne(messageEntity);
@@ -85,18 +88,24 @@ async function markAsRead(db, user, messageId) {
 
 async function markAllUnread(db, user, roomId) {
   const room = await db.collection('rooms').findOne({ _id: ObjectId(roomId) });
-
-  await db
-    .collection('messages')
-    .updateMany({
-      _id: { $in: room.messages.map(id => ObjectId(id)) },
-      userId: room.users.length === 1 ? user._id.toString() : { $ne: user._id.toString() },
-      read: false,
-    }, {
-      $set: {
-        read: true,
-      },
-    });
+  const messagesIds = room.messages.map(id => ObjectId(id));
+  messagesIds.forEach(async (id) => {
+    const message = await db.collection('messages').findOne({ _id: id }),
+      userIdLastMessage = message.userId;
+    await db
+      .collection('messages')
+      .updateOne({
+        _id: message._id,
+      }, {
+        $set: {
+          attachments: {
+            ...message.attachments,
+            [user._id.toString()]: { read: true },
+            [userIdLastMessage.toString()]: { read: true },
+          },
+        },
+      });
+  });
 
   return roomId;
 }
