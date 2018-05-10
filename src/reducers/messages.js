@@ -37,8 +37,31 @@ export const readMessages = (state, action) => {
   const messages =
     action.payload.map(messageId => ({
       ...state[messageId],
-      read: true,
+      attachments: {
+        ...state[messageId].attachments,
+        [state[messageId].userId]: {
+          read: true,
+        },
+      },
     }));
+
+  return ({
+    ...state,
+    ...normalizeMessages(messages),
+  });
+};
+
+export const readMessagesForCurrentUser = (state, action) => {
+  const messages =
+  action.payload.map(messageId => ({
+    ...state[messageId],
+    attachments: {
+      ...state[messageId].attachments,
+      [action.currentUserId]: {
+        read: true,
+      },
+    },
+  }));
 
   return ({
     ...state,
@@ -52,6 +75,7 @@ export const messagesById = (state = {}, action) => {
     case ActionTypes.ADD_MESSAGE: return addMessage(state, action);
     case ActionTypes.FETCH_MESSAGES_SUCCESS: return addMessages(state, action);
     case ActionTypes.READ_MESSAGES: return readMessages(state, action);
+    case ActionTypes.READ_MESSAGES_FOR_CURRENT_USER: return readMessagesForCurrentUser(state, action);
     default: return state;
   }
 };
