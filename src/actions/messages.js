@@ -58,7 +58,7 @@ export const addMessage = message => (
 export const sendMessage = (roomId, message) => (
   async (dispatch) => {
     const payload = await api.sendMessage({ roomId, text: message });
-    console.log(payload);
+
     dispatch(addMessage(payload));
   }
 );

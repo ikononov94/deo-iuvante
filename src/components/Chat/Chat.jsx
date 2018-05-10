@@ -25,16 +25,19 @@ export default class Chat extends Component {
       return <div className={styles.emptyState}>В этом чате пока нет сообщений</div>;
     }
 
-    const aggregateMessage = message => (
-      <MessageBubble
-        isOwner={message.userId === this.props.currentUserId}
-        message={message.text}
-        viewState={message.read ? 'read' : 'delivered'} // should aslo handle pending and delivered state
-        key={message._id}
-        time={message.time}
-        username={this.props.users.byId[message.userId] ? this.props.users.byId[message.userId].name : ''}
-      />
-    );
+    const aggregateMessage = (message) => {
+      const { read } = message.attachments[this.props.currentUserId];
+      return (
+        <MessageBubble
+          isOwner={message.userId === this.props.currentUserId}
+          message={message.text}
+          viewState={read ? 'read' : 'delivered'} // should aslo handle pending and delivered state
+          key={message._id}
+          time={message.time}
+          username={this.props.users.byId[message.userId] ? this.props.users.byId[message.userId].name : ''}
+        />
+      );
+    };
 
     return this.props.messages.map(aggregateMessage);
   }
