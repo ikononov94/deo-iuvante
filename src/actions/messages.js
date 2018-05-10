@@ -36,12 +36,16 @@ export const fetchMessages = roomId => (
 export const addMessage = message => (
   (dispatch, getState) => {
     let payload = {};
-    const { rooms } = getState();
+    const { rooms, currentUser } = getState();
     const room = rooms.byId[message.roomId];
     if (room.users.length === 1) {
       payload = {
         ...message,
-        read: true,
+        attachments: {
+          [currentUser.data._id]: {
+            read: true,
+          },
+        },
       };
     } else payload = message;
 
@@ -54,7 +58,7 @@ export const addMessage = message => (
 export const sendMessage = (roomId, message) => (
   async (dispatch) => {
     const payload = await api.sendMessage({ roomId, text: message });
-
+    console.log(payload);
     dispatch(addMessage(payload));
   }
 );
