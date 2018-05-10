@@ -12,7 +12,7 @@ import ViewportSpinner from '../components/ViewportSpinner/ViewportSpinner';
 import { fetchCurrentUser } from '../actions/currentUser';
 import { fetchUsers } from '../actions/users';
 
-import subscribeOnMessage from '../helpers/subscribeOnMessage';
+import Subscriptions from '../helpers/Subscriptions';
 
 class App extends React.Component {
   constructor(props) {
@@ -85,4 +85,4 @@ const mapDispatchToProps = dispatch => ({
   dispatch,
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(subscribeOnMessage(App)));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Subscriptions(App)));
