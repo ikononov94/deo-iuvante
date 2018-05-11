@@ -18,9 +18,9 @@ const renderDate = (time) => {
 const renderMessageState = (viewState) => {
   switch (viewState) {
     case 'pending': return <Bouncer />;
-    case 'delivered': return (<Icon color="#1be003" glyph="done" />);
-    case 'read': return (<Icon color="#1be003" glyph="done_all" />);
-    case 'error': return (<Icon color="#1be003" glyph="error_outline" />);
+    case 'delivered': return (<Icon color="#20eeda" glyph="done" />);
+    case 'read': return (<Icon color="#20eeda" glyph="done_all" />);
+    case 'error': return (<Icon color="#20eeda" glyph="error_outline" />);
     default: return null;
   }
 };

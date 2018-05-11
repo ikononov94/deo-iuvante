@@ -32,34 +32,34 @@ p {
 }
 
 .Owner .BubbleMessage {
-  background-color: #536dfe;
+  background-color: #3571a7;
   color: #fff;
   margin-right: 5px;
 }
 
 .NotOwner .BubbleMessage {
   margin-left: 5px;
-  background-color: #28374e;
+  background-color: #33393f;
 }
 
 .Owner .BubbleMessage:after {
   content: '';
   display: block;
   border: 5px solid transparent;
-  border-left: 5px solid #536dfe;
+  border-left: 5px solid #3571a7;
   position: absolute;
   bottom: 10px;
-  right: -10px;
+  right: -9px;
 }
 
 .NotOwner .BubbleMessage:before {
   content: '';
   display: block;
   border: 5px solid transparent;
-  border-right: 5px solid #28374e;
+  border-right: 5px solid #33393f;
   position: absolute;
   bottom: 10px;
-  left: -10px;
+  left: -9px;
 }
 
 .Checkmark{
@@ -68,7 +68,7 @@ p {
 
 .UserName {
   font-weight: bold;
-  color: #fe8203;
+  color: #efb05d;
   margin-bottom: .4rem;
   font-size: .8rem;
 }
@@ -96,6 +96,7 @@ p {
 .MessageDate {
   font-size: .7rem;
   align-self: flex-end;
+  padding-left: 20px;
 }
 
 .Message {

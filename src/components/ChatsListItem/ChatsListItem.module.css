@@ -4,7 +4,7 @@
     grid-template-columns: 70px auto auto;
     grid-template-rows: 2rem auto;
     grid-gap: .5rem;
-    border-bottom: 1px #1d2635 solid;
+    border-bottom: 1px #18191d solid;
 }
 
 .avatar {
@@ -45,9 +45,9 @@
 }
 
 .hasReadMessage {
-    color: #15cd7d;
+    color: rgb(32, 238, 218);
 }
 
 .lastMessageUsername {
-    color: #fe8203;
+    color: #3571a7;
 }

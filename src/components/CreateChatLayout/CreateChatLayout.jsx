@@ -92,7 +92,7 @@ class CreateChat extends Component {
       <AppLayout
         headerText="Выберите пользователей"
         headerRight={(<IconButton
-          icon={{ glyph: 'check', color: '#00a000' }}
+          icon={{ glyph: 'check', color: '#20eeda' }}
           onClick={this.showPopup}
         />)}
         headerLeft={(<IconButton
