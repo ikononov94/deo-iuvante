@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchMessages, sendMessage } from '../actions/messages';
+import { fetchMessages, sendMessage, markAllUnreadMessages } from '../actions/messages';
 import { fetchUser, fetchUsers } from '../actions/users';
 
 import Chat from '../components/Chat/Chat';
-import { markAllUnreadMessages } from '../actions/rooms';
 
 class RoomMessages extends Component {
   componentDidMount() {

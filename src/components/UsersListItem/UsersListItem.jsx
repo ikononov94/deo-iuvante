@@ -20,7 +20,7 @@ function UsersListItem({
         {name}
       </span>
       <span className={styles.onlineMark}>
-        {online ? 'online' : 'offline'}
+        { online && <span className={styles.isOnline} />}
       </span>
       <span className={styles.phone}>
         {phone}

@@ -4,14 +4,15 @@
     grid-template-columns: 70px auto auto;
     grid-template-rows: 1rem 1rem 1rem;
     grid-gap: .5rem;
-    border-bottom: 1px #1d2635  solid;
+    border-bottom: 1px #18191d  solid;
 }
 
 .selectedItem {
-    background-color: #025618;
+    background-color: #009687;
 }
 
 .avatar {
+    position: relative;
     grid-column: 1 / 2;
     grid-row: 1 / 4;
     justify-self: center;
@@ -48,6 +49,14 @@
      color: #18a0e2;
      justify-self: end;
  }
+
+.isOnline {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: green;
+}
 
 .selectedIcon {
     grid-column: 3 / 4;

@@ -1,33 +1,65 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './Bubble.css';
+import Bouncer from '../Bouncer/Bouncer';
+import Icon from '../Icon/Icon';
+import Avatar from '../Avatar/Avatar';
 
-const Bubble = props =>
-  (
-    <div className="Bubble" key={Date.now()} >
-      <div className={props.isOwner ? 'Bubble_owner_yes' : ''}>
-        <span className="Bubble__message">
-          <span className="Bubble__message-text">{props.message}</span>
-          <span className="Bubble_created-at">
-            {new Date(props.created_at).toLocaleString(
-        'ru',
-        {
-          hour: 'numeric',
-          minute: 'numeric',
-        },
-)}
-          </span>
-        </span>
-        <span className={props.isRead ? 'Bubble_read_yes' : ''} />
+import styles from './Bubble.module.css';
+
+const renderDate = (time) => {
+  const date = new Date(time);
+  const options = {
+    hour: 'numeric',
+    minute: 'numeric',
+  };
+  return date.toLocaleString('ru', options);
+};
+
+const renderMessageState = (viewState) => {
+  switch (viewState) {
+    case 'pending': return <Bouncer />;
+    case 'delivered': return (<Icon color="#20eeda" glyph="done" />);
+    case 'read': return (<Icon color="#20eeda" glyph="done_all" />);
+    case 'error': return (<Icon color="#20eeda" glyph="error_outline" />);
+    default: return null;
+  }
+};
+
+const Bubble = props => (
+  <div className={styles.Bubble} key={props.time}>
+    <div className={props.isOwner ? styles.Owner : styles.NotOwner}>
+      <div className={styles.BubbleMessage}>
+        {!props.isOwner && <p className={styles.UserName}>{props.username}</p>}
+        <p className={styles.Message}>{props.message}</p>
+        <div className={styles.MessageDate}>
+          <div className={styles.Checkmark}>{renderMessageState(props.viewState)}</div>
+          {renderDate(props.time)}
+        </div>
       </div>
+      {!props.isOwner && <Avatar
+        className={styles.Avatar}
+        src={props.avatarUrl}
+        avatarName={props.username}
+        size="s"
+      />}
     </div>
-  );
+  </div>
+);
 
 Bubble.propTypes = {
-  isOwner: PropTypes.bool.isRequired,
+  username: PropTypes.string,
+  time: PropTypes.number.isRequired,
+  viewState: PropTypes.oneOf(['pending', 'delivered', 'read', 'error']),
+  avatarUrl: PropTypes.string,
   message: PropTypes.string.isRequired,
-  isRead: PropTypes.bool.isRequired,
-  created_at: PropTypes.number.isRequired,
+  isOwner: PropTypes.bool,
+};
+
+Bubble.defaultProps = {
+  viewState: 'pending',
+  username: 'Username',
+  avatarUrl: 'https://s00.yaplakal.com/pics/userpic/2/2/3/av-192322.png',
+  isOwner: false,
 };
 
 export default Bubble;

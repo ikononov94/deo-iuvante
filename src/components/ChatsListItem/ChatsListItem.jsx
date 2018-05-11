@@ -45,7 +45,7 @@ function ChatsListItem(props) {
     props.room.messages[props.room.messages.length - 1] &&
     props.messages[props.room.messages[props.room.messages.length - 1]];
   const lastActivity = lastMessage ? lastMessage.time : null,
-    hasReadMessage = lastMessage ? lastMessage.read : true;
+    hasReadMessage = lastMessage ? lastMessage.attachments[props.currentUser._id].read : true;
   return (
     <Link to={`/chat/${props.room._id}`} className={styles.listItem}>
       <Avatar

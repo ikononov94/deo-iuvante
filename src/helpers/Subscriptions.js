@@ -7,7 +7,7 @@ import { userChangeStatus, updateUser } from '../actions/users';
 import api from '../api';
 
 export default (WrappedComponent) => {
-  class SubscribeOnMessage extends React.Component {
+  class Subscriptions extends React.Component {
     constructor(props) {
       super(props);
 
@@ -61,11 +61,11 @@ export default (WrappedComponent) => {
       return <WrappedComponent {...this.props} />;
     }
   }
-  SubscribeOnMessage.displayName =
+  Subscriptions.displayName =
     `SubscribeOnMessage(${WrappedComponent.displayName || WrappedComponent.name || 'Component'})`;
-  SubscribeOnMessage.propTypes = {
+  Subscriptions.propTypes = {
     dispatch: PropTypes.func.isRequired,
   };
 
-  return SubscribeOnMessage;
+  return Subscriptions;
 };

@@ -36,12 +36,16 @@ export const fetchMessages = roomId => (
 export const addMessage = message => (
   (dispatch, getState) => {
     let payload = {};
-    const { rooms } = getState();
+    const { rooms, currentUser } = getState();
     const room = rooms.byId[message.roomId];
     if (room.users.length === 1) {
       payload = {
         ...message,
-        read: true,
+        attachments: {
+          [currentUser.data._id]: {
+            read: true,
+          },
+        },
       };
     } else payload = message;
 
@@ -59,15 +63,29 @@ export const sendMessage = (roomId, message) => (
   }
 );
 
+export const markAllUnreadMessages = roomId => (
+  async (dispatch, getState) => {
+    api.markAllUnreadMessages(roomId);
+
+    const { rooms, currentUser } = getState();
+    const room = rooms.byId[roomId];
+
+    dispatch({
+      type: ActionTypes.READ_MESSAGES_FOR_CURRENT_USER,
+      payload: room.messages,
+      currentUserId: currentUser.data._id,
+    });
+  }
+);
+
 export const readMessages = roomId => (
   (dispatch, getState) => {
-    const { rooms, messages, currentUser } = getState();
+    const { rooms } = getState();
     const room = rooms.byId[roomId];
-    const messagesIds = room.messages.filter(id => messages.byId[id] !== currentUser.data._id);
 
     dispatch({
       type: ActionTypes.READ_MESSAGES,
-      payload: messagesIds,
+      payload: room.messages,
     });
   }
 );
