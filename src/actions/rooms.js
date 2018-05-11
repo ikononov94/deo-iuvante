@@ -4,18 +4,27 @@ import { sendMessage } from './messages';
 
 export const fetchRooms = () => (dispatch) => {
   api.getRooms()
-    .then(rooms => dispatch({ type: ActionTypes.FETCH_ROOMS_SUCCESS, payload: rooms }));
+    .then(rooms => dispatch({ type: ActionTypes.FETCH_ROOMS_SUCCESS, payload: rooms }))
+    .catch(error => dispatch({ type: ActionTypes.FETCH_ROOMS_ERROR, payload: error }));
 };
 
 export const leaveRoom = roomId => (
   async (dispatch, getState) => {
     const { currentUser, rooms } = getState();
-    let room = rooms.byId[roomId];
+    const room = rooms.byId[roomId];
     if (room.users.length !== 1) {
       dispatch(sendMessage(roomId, `Пользователь ${currentUser.data.name} покинул комнату`));
     }
-    room = await api.currentUserLeaveRoom(roomId);
-    dispatch({ type: ActionTypes.CURRENT_USER_LEAVE_ROOM, payload: room });
+
+    try {
+      const updatesRoom = await api.currentUserLeaveRoom(roomId);
+
+      dispatch({ type: ActionTypes.CURRENT_USER_LEAVE_ROOM, payload: updatesRoom });
+    } catch (e) {
+      dispatch({
+        type: ActionTypes.CURRENT_USER_LEAVE_ROOM_ERROR,
+      });
+    }
   }
 );
 
